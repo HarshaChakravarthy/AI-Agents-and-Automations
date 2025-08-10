@@ -15,16 +15,16 @@ Generative AI • LLMs (GPT-4/3.5) • Agentic workflows • Prompt engineering 
 
 ## Projects
 
-1. Adding Title, Keywords for Stock Images
-2. AI Audio Transcriber
-3. Analyze Images
-4. Email Summary
-5. Form Submission to Telegram
-6. LinkedIn Post Generator
-7. Onboarding Clients
-8. Retell AI Conversational Agent
-9. Retell AI Receptionist (Bookings)
-10. Runway + ElevenLabs Video Generator
-11. T-Shirt Image Generator
-12. Telegram Bot to Chat (Active)
-13. YouTube Video Posting System
+1. Adding Title, Keywords for Stock Images (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Adding%20Title%2C%20Keywords%20for%20Stock%20Images)
+2. AI Audio Transcriber (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/AI%20Audio%20Transcriber)
+3. Analyze Images (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Analyze%20Images)
+4. Email Summary (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Email%20Summary)
+5. Form Submission to Telegram (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Form%20Submission%20to%20Telegram)
+6. LinkedIn Post Generator (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/LinkedIn%20Post%20Generator)
+7. Onboarding Clients (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Onboarding%20Clients)
+8. Retell AI Conversational Agent (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Retell%20AI%20Conversational%20Agent)
+9. Retell AI Receptionist (Bookings) (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Retell%20AI%20Receptionist%20(Bookings))
+10. Runway + ElevenLabs Video Generator (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Runway%20%2B%20ElevenLabs%20Video%20Generator)
+11. T-Shirt Image Generator (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/T-Shirt%20Image%20Generator)
+12. Telegram Bot to Chat (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Telegram%20Bot%20to%20Chat)
+13. YouTube Video Posting System (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/YouTube%20Video%20Posting%20System)

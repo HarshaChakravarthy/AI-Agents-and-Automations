@@ -1,0 +1,340 @@
+{
+  "name": "Retell AI Conversional",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Summarize the following transcript of an interaction between a customer and a voice ai agent name Sophia from Crescent Family Dental. output the summary of the call in 500 characters and also extract the name, email, phone number and insurance provider, Date (in YYYY-MM-DD format), Time (in HH:MM AM/PM format), Entire Call transcript as separate JSON items.\n\n\nTranscript: {{ $json.body.call.transcript }}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        260
+      ],
+      "id": "6542cc55-8b37-471d-9575-514748218827",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -760,
+        460
+      ],
+      "id": "aba0075f-8df0-4fe8-9e4f-369813ed192d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "cm0EQtPOPXF0PG9P",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\n  \"call_summary\": \"California\",\n  \"first_name\": \"California\",\n  \"last_name\": \"California\",\n  \"phone\": \"California\",\n  \"email\": \"California\",\n  \"insurance\": \"California\",\n  \"Date\": \"California\",\n  \"Time\": \"California\",\n  \"Call Transcript\": \"California\"\n  \n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -520,
+        460
+      ],
+      "id": "67c8e50a-66b5-452f-a308-33e42e1551f7",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "path": "Conversional",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -940,
+        260
+      ],
+      "id": "44f8ac20-15fa-419c-b29d-10f78f27c251",
+      "name": "Webhook",
+      "webhookId": "13d18f19-1fab-405c-87f5-65b5e98aee5e"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Your Dental Appointment is Confirmed – Crescent Family Dental",
+        "emailType": "text",
+        "message": "=Hi {{ $json['First Name'] }},\n\nThank you for calling Crescent Family Dental.\n\nYour dental appointment has been successfully scheduled.\n\n🗓 Date: {{ $('AI Agent').item.json.output.Date }}\n⏰ Time: {{ $('AI Agent').item.json.output.Time }}\n📍 Location: 123 Harmony Lane, Cityscape, California 98765  \n📞 Contact: 551-359-0161  \n📧 Email: info@crescentfamilydental.com\n\nInsurance Provider: {{ $json.Insurance }}\n\nIf you have any questions or need to reschedule, feel free to contact us.\n\nWe look forward to seeing you!\n\nWarm regards,\nCrescent Family Dental Team\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -180,
+        60
+      ],
+      "id": "3973b66d-babb-4738-acff-50859c18a589",
+      "name": "Message to Patient",
+      "webhookId": "b578c562-52fc-4a70-a421-678c9f618411",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "2r16VklIFSr5x4oE",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "harshachakravarthy11@gmail.com",
+        "subject": "Got a New Booking",
+        "emailType": "text",
+        "message": "=Hello,\n\nCongratulations we got a new booking\n\nFirst Name: {{ $json['First Name'] }}\nLast Name: {{ $json['Last Name'] }}\nEmail: {{ $json.Email }}\nPhone Number: {{ $json['Phone Number'] }}\nInsurance: {{ $json.Insurance }}\nSummary: {{ $json.Summary }}\n\nThanks & Regards\nSupport Team",
+        "options": {
+          "appendAttribution": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -180,
+        260
+      ],
+      "id": "9d3f9bd5-4f3a-49fe-b28a-f79f18fa1faa",
+      "name": "Message to Owner",
+      "webhookId": "db9e911a-f761-4b07-901d-27686cee5137",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "2r16VklIFSr5x4oE",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1ijTyoASRJbQ781woE5TC6RZlyMTZwWhMjDjrBOws5f8",
+          "mode": "list",
+          "cachedResultName": "Contact",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ijTyoASRJbQ781woE5TC6RZlyMTZwWhMjDjrBOws5f8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1244211033,
+          "mode": "list",
+          "cachedResultName": "Conversional Flow",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ijTyoASRJbQ781woE5TC6RZlyMTZwWhMjDjrBOws5f8/edit#gid=1244211033"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First Name": "={{ $json.output.first_name }}",
+            "Last Name": "={{ $json.output.last_name }}",
+            "Phone Number": "={{ $json.output.phone }}",
+            "Email": "={{ $json.output.email }}",
+            "Insurance": "={{ $json.output.insurance }}",
+            "Summary": "={{ $json.output.call_summary }}",
+            "Date": "={{ $json.output.Date }}",
+            "Time": "={{ $json.output.Time }}",
+            "Entire Transcript": "={{ $json.output['Call Transcript'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Insurance",
+              "displayName": "Insurance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Time",
+              "displayName": "Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Entire Transcript",
+              "displayName": "Entire Transcript",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -360,
+        260
+      ],
+      "id": "308dc8dd-b807-452b-8c0e-194af43113e0",
+      "name": "Append row in sheet",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bJ0ztDpsrWdKx9V6",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Message to Patient",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Message to Owner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5fa29af5-b854-46aa-a73a-86c6b1e042a1",
+  "meta": {
+    "instanceId": "f37a4b669cdfe9172ee82e3e5a9ac801477d5a9fcff372b799579859468d424e"
+  },
+  "id": "OwdqTlY61oxduVpQ",
+  "tags": []
+}

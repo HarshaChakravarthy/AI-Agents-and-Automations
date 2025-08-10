@@ -25,4 +25,4 @@ Store minimal PII; avoid raw audio in long-term logs.
 This workflow turns unstructured audio into usable insights, enabling faster follow-ups and better knowledge capture.
 
 ### Workflow:
-<img width="1918" height="915" alt="image" src="https://github.com/user-attachments/assets/564a8af4-6913-41cf-8edf-e3285444a99d" />
+<img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/a015abef-ee95-4f94-a069-025467654de9" />

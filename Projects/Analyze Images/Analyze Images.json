@@ -1,0 +1,389 @@
+{
+  "name": "Analyze Images",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        -40
+      ],
+      "id": "eeb58e17-4fa5-4224-b16d-62510cce3823",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1rkjHWXr9eYevFBoXbD51LN07iCEmrDTv",
+            "mode": "list",
+            "cachedResultName": "N8N drive integration project",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1rkjHWXr9eYevFBoXbD51LN07iCEmrDTv"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -280,
+        -40
+      ],
+      "id": "88e13b94-45dd-49f4-a64c-a1930a04ce18",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "i98IYNBbZSu4ATtK",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1fV5QB4pdyazk4DrbLEcYxzucLdaui_F0",
+          "mode": "list",
+          "cachedResultName": "Adobe Stock.xlsx",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1fV5QB4pdyazk4DrbLEcYxzucLdaui_F0/edit?usp=drivesdk&ouid=103238511826784668210&rtpof=true&sd=true"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -60,
+        -40
+      ],
+      "id": "3413126d-7790-4731-ae9d-775a34546797",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "i98IYNBbZSu4ATtK",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        160,
+        -40
+      ],
+      "id": "bbfb0280-6a88-4ece-a0b3-87800fc4daa3",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        380,
+        -140
+      ],
+      "id": "544c31be-db7c-49d3-8dd9-7bf0dd185e1b",
+      "name": "Wait",
+      "webhookId": "683e584e-091f-4d2e-b58d-45ea97248c9b"
+    },
+    {
+      "parameters": {
+        "operation": "clear",
+        "documentId": {
+          "__rl": true,
+          "value": "1HCNfC7h_qk8goQh5DOTw0pMxcu0Qe3U7fVzldop7qzg",
+          "mode": "list",
+          "cachedResultName": "Adobe Stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HCNfC7h_qk8goQh5DOTw0pMxcu0Qe3U7fVzldop7qzg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HCNfC7h_qk8goQh5DOTw0pMxcu0Qe3U7fVzldop7qzg/edit#gid=0"
+        },
+        "keepFirstRow": true
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        600,
+        -140
+      ],
+      "id": "f9b4a404-f405-4ae6-ae48-5c947d1f1e00",
+      "name": "Clear sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bJ0ztDpsrWdKx9V6",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "imageUrls": "={{ $json.name }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        380,
+        60
+      ],
+      "id": "1879dd88-86a8-48cc-92f6-93da1160637c",
+      "name": "Analyze image",
+      "credentials": {
+        "openAiApi": {
+          "id": "cm0EQtPOPXF0PG9P",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract the JSON response from the previous step\nconst inputData = $input.first().json.content;\n// Strip out possible markdown wrappers like ```json\nconst sanitizedData = inputData.replace(/```json\\n\\n/g, '');\ntry {\n // Attempt to parse the JSON string\n const dataObjects = JSON.parse(sanitizedData);\n // Format each object: convert keywords array into a comma-separated string\n const result = dataObjects.map(entry => ({\n json: {\n Title: entry.Title,\n Description: entry.Description,\n Keywords: entry.Keywords.join(', ')\n }\n }));\n return result;\n} catch (err) {\n // Throw an error if the JSON is invalid\n throw new Error(\"JSON parsing failed: \" + err.message);\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        60
+      ],
+      "id": "5e816d92-428c-41d7-9279-eaca8b2bda4e",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1HCNfC7h_qk8goQh5DOTw0pMxcu0Qe3U7fVzldop7qzg",
+          "mode": "list",
+          "cachedResultName": "Adobe Stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HCNfC7h_qk8goQh5DOTw0pMxcu0Qe3U7fVzldop7qzg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HCNfC7h_qk8goQh5DOTw0pMxcu0Qe3U7fVzldop7qzg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Filename",
+              "displayName": "Filename",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Keywords",
+              "displayName": "Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        820,
+        60
+      ],
+      "id": "d50512b1-6ce0-4a44-a695-9bfb9cce2336",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bJ0ztDpsrWdKx9V6",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteFile",
+        "fileId": {
+          "__rl": true,
+          "value": "1HCNfC7h_qk8goQh5DOTw0pMxcu0Qe3U7fVzldop7qzg",
+          "mode": "list",
+          "cachedResultName": "Adobe Stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HCNfC7h_qk8goQh5DOTw0pMxcu0Qe3U7fVzldop7qzg/edit?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        120
+      ],
+      "id": "df6c26bb-2fd1-4fc6-8354-9805e0dcd4b7",
+      "name": "Delete a file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "i98IYNBbZSu4ATtK",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Clear sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Delete a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete a file": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c188cd2d-e2b8-40a7-ae1e-666702232093",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f37a4b669cdfe9172ee82e3e5a9ac801477d5a9fcff372b799579859468d424e"
+  },
+  "id": "TijV8mdzPkhVw58M",
+  "tags": []
+}

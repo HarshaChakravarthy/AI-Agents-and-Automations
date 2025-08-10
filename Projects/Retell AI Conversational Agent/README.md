@@ -1,4 +1,4 @@
-## Retell AI Conversational Agent
+## Retell AI Single Prompt Conversational Agent
 
 ### Problem statement:
 Call centers and service lines face repetitive queries that can be resolved automatically with a natural voice interface.

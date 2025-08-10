@@ -28,3 +28,7 @@ Generative AI • LLMs (GPT-4/3.5) • Agentic workflows • Prompt engineering 
 11. T-Shirt Image Generator (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/T-Shirt%20Image%20Generator)
 12. Telegram Bot to Chat (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Telegram%20Bot%20to%20Chat)
 13. YouTube Video Posting System (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/YouTube%20Video%20Posting%20System)
+
+14. [Open the dataset](data/dataset.csv)
+[Read the guide](docs/guide.md)
+

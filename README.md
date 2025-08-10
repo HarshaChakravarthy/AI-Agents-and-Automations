@@ -28,8 +28,3 @@ Generative AI • LLMs (GPT-4/3.5) • Agentic workflows • Prompt engineering 
 11. T-Shirt Image Generator
 12. Telegram Bot to Chat (Active)
 13. YouTube Video Posting System
-
-
-Telegram Bot to Chat (Active)
-
-YouTube Video Posting System

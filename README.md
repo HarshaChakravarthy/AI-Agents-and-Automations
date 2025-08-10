@@ -1,7 +1,7 @@
 ## AI Agents & Automations with n8n
 
 ### Overview
-This portfolio showcases 13 production-minded workflows built with n8n, Generative AI (LLMs), and common business integrations. The projects focus on agentic AI, RAG-style enrichment, image/audio intelligence, communications, and data operations. Each workflow follows sound engineering practices: input validation, idempotency, retries/backoff, error handling, and PII awareness.
+This portfolio production-minded workflows built with n8n, Generative AI (LLMs), and common business integrations. The projects focus on agentic AI, RAG-style enrichment, image/audio intelligence, communications, and data operations. Each workflow follows sound engineering practices: input validation, idempotency, retries/backoff, error handling, and PII awareness.
 
 ### How to use
 

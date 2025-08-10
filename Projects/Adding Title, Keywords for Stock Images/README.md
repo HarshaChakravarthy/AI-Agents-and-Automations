@@ -32,4 +32,5 @@ Automated metadata boosts listing throughput and consistency, improving search r
 APIs & credentials not included: This repo contains only n8n workflows. No live API endpoints, keys, or third-party credentials are provided—configure your own in n8n (Settings → Credentials) before running.
 
 ### Workflow:
-<img width="1918" height="907" alt="image" src="https://github.com/user-attachments/assets/067ac6b2-ffe5-4a59-8afd-a885ad973dea" />
+<img width="1918" height="908" alt="image" src="https://github.com/user-attachments/assets/ece0271e-13f2-44fd-aecd-52681d719c76" />
+

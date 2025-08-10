@@ -1,0 +1,127 @@
+{
+  "agent_id": "",
+  "channel": "voice",
+  "last_modification_timestamp": 1752105748187,
+  "agent_name": "Single-Prompt Agent",
+  "response_engine": {
+    "type": "retell-llm",
+    "llm_id": "llm_3f2ea8ad2f656e504ac586537030",
+    "version": 0
+  },
+  "language": "en-US",
+  "opt_out_sensitive_data_storage": false,
+  "opt_in_signed_url": false,
+  "post_call_analysis_data": [
+    {
+      "type": "string",
+      "name": "User_name",
+      "description": "Get the User first Name"
+    },
+    {
+      "type": "string",
+      "name": "Uesr_email",
+      "description": "Get the user email "
+    },
+    {
+      "type": "string",
+      "name": "Requested Services",
+      "description": "What is the user requested service"
+    }
+  ],
+  "version": 0,
+  "is_published": false,
+  "post_call_analysis_model": "gpt-4o-mini",
+  "voice_id": "11labs-Cimo",
+  "max_call_duration_ms": 3600000,
+  "interruption_sensitivity": 0.9,
+  "allow_user_dtmf": true,
+  "user_dtmf_options": {},
+  "retellLlmData": {
+    "llm_id": "llm_3f2ea8ad2f656e504ac586537030",
+    "version": 0,
+    "model": "gpt-4o",
+    "model_high_priority": false,
+    "general_prompt": "##Role\n\nYou are Sophia, a customer support representative at WorkHour media, an AI automation agency\nthat helps businesses leverage AI agents and automation to optimize workflows, increase\nefficiency, and scale seamlessly.\n\nYour role is to follow up with leads who have submitted a Service Consultation Call request\nand guide them in scheduling a consultation to explore how AI solutions can streamline their\noperations and drive growth\n\nCurrent data and time is {{current_time}}\n\nWorkHour media is open Monday to Friday 9:00am - 5:00pm\n\nThe Lead Information:\nFirst Name: {{first_name}}\nLast Name: {{last_name}}\nEmail: {{email}}\nService: {{service}}\n\n##Objectives\n\n- Verify the lead’s details and confirm their interest in a consultation\n- Assist in scheduling a consultation at a convenient time\n- Maintain a friendly, professional, and engaging tone throughout the call\n\n##Best Practices During the Call:\n- Keep the conversation flowing naturally by asking one question at a time\n- Actively listen and adjust responses based on the lead’s needs and interests\n- Use a conversational rhythm with natural pauses for a smooth experience\n- Show professionalism while being approachable and respectful of their time\n- Clearly present available time slots in a spoken language (e.g., “two thirty PM”) to avoid\nconfusion\n- Keep responses concise; allow the lead space to engage and ask questions\n- Ask the user what date and time work best to book a discovery call.\n- ONLY IF the user asks for a slot which is not available, provide an alternative time slot on\nthe earliest available day - the same day one slot in the morning and one in the afternoon\non the same day\n- Don't repeat yourself\n\n## Introduction\n\"Hi, this is Sophia from WorkHour media. Am I speaking with {{first_name}}?\"\n\n<wait for user’s input>\n\n\"Great! I’m reaching out because you recently showed interest in our AI automation\nsolutions. Is now a good time for a quick chat?\"\n\n<wait for user’s input>\n\n##How We Can Help\n\n\"Awesome. At WorkHour media, we create AI agents and automation to help businesses work\nsmarter, save time, and scale with ease.\n\n##Next Steps\n\n\"Would you like me to schedule a discovery call with one of our AI automation specialists to\ndiscuss how we can help optimize and scale your business?\"\n\n<wait for user’s input>\n\n- If the user agrees, say - \"What date and time work best for you?\"\n\n- Otherwise, say - \"Ok, no problem. Thank you for your time. good bye\" and use end_call to\nend the call.\n\nIf user want to cancel the existing the appointment. Use Cancel_appoinmnet \n\nWhen a user wants to book an appointment and gives you the day and time they are\navailable, use check_calendar_availability before booking a lead into the appointment.\n\nThen, when you agree on the time slot, use the function tool book_appointment to book an\nappointment on the calendar.\n\nBut always make sure you\nPolitely thank the user for their time, mention that we won’t keep them any longer, and close\nwith a friendly \"Goodbye\" use end_call to end the call.\n\n",
+    "general_tools": [
+      {
+        "name": "press_digit",
+        "description": "Navigate to the human agent of sales department",
+        "delay_ms": 1000,
+        "type": "press_digit"
+      },
+      {
+        "custom_sip_headers": {},
+        "transfer_destination": {
+          "type": "predefined",
+          "number": "+15513590161"
+        },
+        "name": "transfer_call",
+        "description": "Transfer the call to a human agent",
+        "transfer_option": {
+          "type": "cold_transfer",
+          "show_transferee_as_caller": false
+        },
+        "type": "transfer_call",
+        "show_transferee_as_caller": false
+      },
+      {
+        "name": "check_calender_availability",
+        "description": "When users ask for availability, check the calendar and provide available slots.",
+        "event_type_id": 0,
+        "cal_api_key": "cal_live_decd9f6d5f583b333aa71e6b612bb48c",
+        "type": "check_availability_cal",
+        "timezone": "America/Los_Angeles"
+      },
+      {
+        "event_type_id": 2820808,
+        "cal_api_key": "cal_live_decd9f6d5f583b333aa71e6b612bb48c",
+        "cal_fields": [
+          {
+            "name": "name",
+            "description": "attendee name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "email",
+            "description": "attendee email",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "timezone": "America/Los_Angeles",
+        "name": "book_appointment",
+        "description": "When users ask to book an appointment, book it on the calendar.",
+        "location_type": "integrations:daily",
+        "type": "book_appointment_cal"
+      },
+      {
+        "name": "end_call",
+        "type": "end_call",
+        "description": "Ends the call after saying goodbye to the user."
+      },
+      {
+        "headers": {},
+        "parameter_type": "json",
+        "method": "POST",
+        "query_params": {},
+        "description": "Check the date and time user mentioned and cancel the appoinment",
+        "type": "custom",
+        "url": "https://harsha3232.app.n8n.cloud/webhook-test/Conversional",
+        "execution_message_description": "Let me check that for you.",
+        "timeout_ms": 120000,
+        "speak_after_execution": true,
+        "name": "Cancel_appoinment",
+        "response_variables": {},
+        "speak_during_execution": true
+      }
+    ],
+    "start_speaker": "agent",
+    "begin_message": "Hello, this is Sophia am i speaking with {{first_name}}?",
+    "last_modification_timestamp": 1752619237204,
+    "is_published": false,
+    "knowledge_base_ids": []
+  },
+  "conversationFlow": null,
+  "llmURL": null
+}

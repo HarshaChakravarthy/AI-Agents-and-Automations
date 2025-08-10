@@ -15,7 +15,7 @@ Generative AI • LLMs (GPT-4/3.5) • Agentic workflows • Prompt engineering 
 
 ## Projects
 
-1. Adding Title, Keywords for Stock Images (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Adding%20Title%2C%20Keywords%20for%20Stock%20Images)
+1. [Adding Title, Keywords for Stock Images] (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Adding%20Title%2C%20Keywords%20for%20Stock%20Images)
 2. AI Audio Transcriber (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/AI%20Audio%20Transcriber)
 3. Analyze Images (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Analyze%20Images)
 4. Email Summary (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Email%20Summary)

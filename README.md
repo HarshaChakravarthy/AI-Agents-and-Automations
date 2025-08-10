@@ -15,7 +15,7 @@ Generative AI • LLMs (GPT-4/3.5) • Agentic workflows • Prompt engineering 
 
 ## Projects
 
-1. [Adding Title, Keywords for Stock Images] (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Adding%20Title%2C%20Keywords%20for%20Stock%20Images)
+1. [Adding Title, Keywords for Stock Images](https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Adding%20Title%2C%20Keywords%20for%20Stock%20Images)
 2. AI Audio Transcriber (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/AI%20Audio%20Transcriber)
 3. Analyze Images (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Analyze%20Images)
 4. Email Summary (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Email%20Summary)
@@ -28,7 +28,5 @@ Generative AI • LLMs (GPT-4/3.5) • Agentic workflows • Prompt engineering 
 11. T-Shirt Image Generator (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/T-Shirt%20Image%20Generator)
 12. Telegram Bot to Chat (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/Telegram%20Bot%20to%20Chat)
 13. YouTube Video Posting System (https://github.com/HarshaChakravarthy/AI-Agents-and-Automations/tree/main/Projects/YouTube%20Video%20Posting%20System)
-
-14. [Open the dataset](data/dataset.csv)
-[Read the guide](docs/guide.md)
+[Visit my site](https://example.com)
 

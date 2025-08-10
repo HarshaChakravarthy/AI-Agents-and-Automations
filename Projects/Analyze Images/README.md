@@ -26,4 +26,5 @@ Consistent, machine-readable annotations reduce manual moderation and improve se
 APIs & credentials not included: This repo contains only n8n workflows. No live API endpoints, keys, or third-party credentials are provided—configure your own in n8n (Settings → Credentials) before running.
 
 ### Workflow:
-<img width="1918" height="916" alt="image" src="https://github.com/user-attachments/assets/043904ea-a1ae-49ab-954c-443d87c5554a" />
+<img width="1917" height="915" alt="image" src="https://github.com/user-attachments/assets/ed367d0a-945d-4b1d-be42-a8a8b976778d" />
+
